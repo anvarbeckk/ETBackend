@@ -31,18 +31,3 @@ class QuestionAdmin(ModelAdmin):
     list_filter = ('level',)
     search_fields = ('content',)
     inlines = [AnswerInline]
-
-
-def dashboard(request):
-    return {
-        "cards": [
-            {
-                "title": "Total Questions",
-                "value": Question.objects.count(),
-            },
-            {
-                "title": "Questions by Level",
-                "value": Question.objects.values('level').annotate(count=Count('id')),
-            },
-        ],
-    }
